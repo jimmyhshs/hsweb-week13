@@ -46,6 +46,37 @@
     꼭 들어가야 하는 것: preventDefault  .value  trim()  createElement  textContent  push
     */
     // 여기에 JavaScript를 작성하세요
+    document.body.innerHTML = `
+  <form id="f">
+    <input id="text" placeholder="할 일">
+    <button>추가</button>
+  </form>
+  <ul id="list"></ul>
+`;
+
+const todos = [];
+
+function render() {
+  const ul = document.querySelector('#list');
+  ul.textContent = '';
+  todos.forEach((t) => {
+    const li = document.createElement('li');
+    li.textContent = t;          // 사용자 입력이므로 textContent
+    ul.append(li);
+  });
+}
+
+document.querySelector('#f').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = document.querySelector('#text');
+  const v = input.value.trim();
+  if (!v) return;
+  todos.push(v);
+  input.value = '';
+  render();
+});
+
+render();
   </script>
 </body>
 </html>
